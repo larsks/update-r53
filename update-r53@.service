@@ -3,5 +3,6 @@ Description=Update record %i in Amazon Route 53
 
 [Service]
 Environment=ANSIBLE_LOCALHOST_WARNING=false
+Environment=ANSIBLE_STDOUT_CALLBACK=actionable
 EnvironmentFile=/etc/route53/%i.conf
 ExecStart=/usr/local/bin/update-r53
