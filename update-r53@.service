@@ -1,0 +1,6 @@
+[Unit]
+Description=Update record %i in Amazon Route 53
+
+[Service]
+EnvironmentFile=/etc/route53/%i.conf
+ExecStart=/usr/local/bin/update-r53

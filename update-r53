@@ -1,0 +1,26 @@
+#!/usr/bin/ansible-playbook
+
+- hosts: localhost
+  vars:
+    my_ip: "{{ lookup('pipe', 'dig +short myip.opendns.com @resolver1.opendns.com') }}"
+    aws_access_key: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
+    aws_secret_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
+    r53_dns_zone: "{{ lookup('env', 'R53_DNS_ZONE') }}"
+    r53_dns_record: "{{ lookup('env', 'R53_DNS_RECORD') }}"
+    r53_dns_ttl: 300
+
+  tasks:
+    - debug:
+        var: my_ip
+
+    - route53:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        state: present
+        zone: "{{ r53_dns_zone }}"
+        record: "{{ r53_dns_record }}"
+        type: A
+        ttl: "{{ r53_dns_ttl }}"
+        value: "{{ my_ip }}"
+        overwrite: true
+        wait: true
