@@ -17,6 +17,7 @@
         var: my_ip
 
     - name: update record in route 53
+      no_log: true
       route53:
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"
