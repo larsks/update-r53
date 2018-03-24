@@ -2,6 +2,7 @@
 Description=Update record %i in Amazon Route 53
 
 [Service]
+Type=oneshot
 Environment=ANSIBLE_LOCALHOST_WARNING=false
 Environment=ANSIBLE_STDOUT_CALLBACK=actionable
 EnvironmentFile=/etc/route53/%i.conf
