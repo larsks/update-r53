@@ -4,7 +4,7 @@
   hosts: localhost
   gather_facts: false
   vars:
-    my_ip: "{{ lookup('pipe', 'dig +short myip.opendns.com @resolver1.opendns.com') }}"
+    my_ip: "{{ lookup('pipe', 'curl -s ipv4.icanhazip.com') }}"
     aws_access_key: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
     aws_secret_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
     r53_dns_zone: "{{ lookup('env', 'R53_DNS_ZONE') }}"
